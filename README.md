@@ -12,7 +12,7 @@ Data:
 2. Lenna.tif: A real image for tests.
 
 We implement a function to generate low-rank matrices. We implement ADMM and SVT for recovering the generated low-rank matrices
-and reconstruct a real image. Test the modified Cholesky algorithm on an example.
+and reconstruct a real image. Test the modified Cholesky algorithm on an indefinite matrix and make it positive definite (semidefinite).
 
 
 Codes descriptions:
@@ -25,6 +25,8 @@ Codes descriptions:
    
    
 2. Test_SVT.m: Run this file to test the SVT on the generated low-rank matrices.
+   
+   Test_SVT_image.m: Run this file to test SVT on image reconstruction.
 
    SVT.m: A function to implement the singular value thresholding algorithm.
 
@@ -33,3 +35,5 @@ Codes descriptions:
 
 3. modchol_ldlt.m: Run this file to test the modified Cholesky algorithm to make an indefinite matrix positive definite (semidefinite).
 
+Notes:
+Please correct the repository location for "Lenna.tif" when you run "Test_ADMM_image.m" and "Test_SVT_image.m".
