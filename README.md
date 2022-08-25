@@ -1,6 +1,6 @@
 # summer-project
 
-These are the codes for numerical experienments in my dissertation. We upload codes for three algorithms.
+These are the codes for numerical experienments in my dissertation. We upload codes for the following three algorithms.
 
 Three algorithms:
 1. Alternating Direction Method of Multipliers (ADMM)
@@ -10,9 +10,11 @@ Three algorithms:
 Data:
 1. Create_low_rank_matrix.m: A function to generate low rank matrices.
 2. Lenna.tif: A real image for tests.
+3. low_rank_10_B.csv: A 10-by-10 matrix B of rank 2
+4. low_rank_10_B_new.csv: A 60% undersampled matrix of the matrix B
 
 We implement a function to generate low-rank matrices. We implement ADMM and SVT for recovering the generated low-rank matrices
-and reconstruct a real image. Test the modified Cholesky algorithm on an indefinite matrix and make it positive definite (semidefinite).
+and reconstruct a real image. Test the modified Cholesky algorithm on an indefinite matrix and make it positive definite (semidefinite). For your convenience, we can also use the data "low_rank_10_B.csv" and "low_rank_10_B_new.csv" to test algorithms on a 10-by-10 matrix.
 
 
 Codes descriptions:
