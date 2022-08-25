@@ -12,21 +12,27 @@
 
 % Input:
 % C: A given matrix
-% B_new: an undersampled matrix
-% P: a projection matrix such that P(i,j)=1 if B_new(i,j)!=0, P(i,j)=0, otherwise.
-% P_new: the column vector of P
-% m_h: the number of rows of the matrix B_new
-% n_h: the number of columns of the matrix B_new
+% B_new: An undersampled matrix
+% P: A projection matrix such that P(i,j)=1 if B_new(i,j)!=0, P(i,j)=0, otherwise.
+% P_new: The column vector of P
+% m_h: The number of rows of the matrix B_new
+% n_h: The number of columns of the matrix B_new
 % tol: tolerance
-% rho: a penalty parameter
+% rho: A penalty parameter
 
 % Output: 
-% X: the variable of the SDP
-% W: the recovered matrix
-% primal, dual, gap: three different infeasibilities
-% iter: the number of iterations
+% X: The variable of the SDP
+% W: The recovered matrix
+% primal, dual, gap: Three different infeasibilities
+% iter: The number of iterations
 
-function [X, W, primal, dual, gap, iter, r_W, dinf] = ADMM_SDP(C, B_new, P, P_new, m_h, n_h, tol, rho)
+% Optional output parameters:
+% Eig_B: Eigenvalues before the projection
+% Eig_A: Eigenvalues after the projection
+% r_W: The rank of matrix W^k
+% dinf: The dual infeasibility
+
+function [X, W, primal, dual, gap, iter] = ADMM_SDP(C, B_new, P, P_new, m_h, n_h, tol, rho)
 
 % Size of matrix X
 m = m_h*n_h;
@@ -92,20 +98,20 @@ while (delta > tol)
     % Update Z
     Z = C - A_star_y - (1/rho).* X;
  
-    % eigenvalues decomposition, D is a diagonal matrix with eigenvalues
+    % Eigenvalue decomposition, D is a diagonal matrix with eigenvalues
     [V, D] = eig(Z);
     [L,LD] = ldl(Z);
     con(iter) = cond(L*L');
     
     % Store the eigenvalues before the projection 
-    Eig_B(:,iter) = diag(D);
+    % Eig_B(:,iter) = diag(D);
     
     % Projection: cut the negative eigenvalues
     DD = D >= 0;
     D = DD.*D;
     
     % Store the eigenvalues after the projection
-    Eig_A(:,iter) = diag(D);
+    % Eig_A(:,iter) = diag(D);
     
     % Update S
     S = V*D*V';
@@ -181,7 +187,7 @@ while (delta > tol)
     
     % Recovererd matrix W
     W = 2*X(1:m_h,m_h+1:m_h+n_h);
-    r_W(iter) = rank(W);
+    % r_W(iter) = rank(W);
     
 end
 end
