@@ -1,6 +1,6 @@
 # summer-project
 
-These are the codes for numerical experienments in my dissertation. We upload codes for the following three algorithms.
+The code for numerical experiments in my dissertation is uploaded here. We mainly upload code for the following three algorithms.
 
 Three algorithms:
 1. Alternating Direction Method of Multipliers (ADMM)
