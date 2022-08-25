@@ -26,7 +26,7 @@
 % primal, dual, gap: three different infeasibilities
 % iter: the number of iterations
 
-function [X, W, primal, dual, gap, iter] = ADMM_SDP(C, B_new, P, P_new, m_h, n_h, tol, rho)
+function [X, W, primal, dual, gap, iter, r_W, dinf] = ADMM_SDP(C, B_new, P, P_new, m_h, n_h, tol, rho)
 
 % Size of matrix X
 m = m_h*n_h;
@@ -148,40 +148,40 @@ while (delta > tol)
 %     gap = abs(b'*y - trace(C'*X))/(1+abs(b'*y)+trace(C'*X));
     ginf(iter) = gap;
     
-    delta = primal
-%     delta = max([primal, gap, dual])
+%     delta = primal
+    delta = max([primal, gap, dual])
     
     
     % Updating the Penalty Parameter if m_h > 100
-    if primal_up < dual
-        counter_d = counter_d + 1;
-    else
-        counter_d = 0;
-    end
-    
-    if counter_d > 10
-        increment = rho/gamma;
-        if increment > 1e-4 && increment < 1e+4
-            rho = increment;
-        end    
-    end
-    
-    if primal_up > dual
-        counter_i = counter_i + 1;
-    else
-        counter_i = 0;
-    end
-    
-    if counter_i > 10
-        decreasing = rho*gamma;
-        if decreasing > 1e-4 && decreasing < 1e+4
-            rho = decreasing;
-        end    
-    end    
+%     if primal_up < dual
+%         counter_d = counter_d + 1;
+%     else
+%         counter_d = 0;
+%     end
+%     
+%     if counter_d > 10
+%         increment = rho/gamma;
+%         if increment > 1e-4 && increment < 1e+4
+%             rho = increment;
+%         end    
+%     end
+%     
+%     if primal_up > dual
+%         counter_i = counter_i + 1;
+%     else
+%         counter_i = 0;
+%     end
+%     
+%     if counter_i > 10
+%         decreasing = rho*gamma;
+%         if decreasing > 1e-4 && decreasing < 1e+4
+%             rho = decreasing;
+%         end    
+%     end    
     
     % Recovererd matrix W
     W = 2*X(1:m_h,m_h+1:m_h+n_h);
-%     r_W(iter) = rank(W);
+    r_W(iter) = rank(W);
     
 end
 end
